@@ -1,6 +1,8 @@
 mileage\config\kafka\KafkaProcessor.class
 mileage\PointUsed.class
 mileage\MemberStatusChanged.class
+mileage\ForfeitedController.class
+mileage\ForfeitedRepository.class
 mileage\PointForfeited.class
 mileage\AbstractEvent$1.class
 mileage\AbstractEvent.class
