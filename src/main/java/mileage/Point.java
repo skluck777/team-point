@@ -23,6 +23,12 @@ public class Point {
         @PostPersist
         public void onPostPersist() {
                 System.out.println("\n$$$onPostPersist");
+                try {
+                        Thread.currentThread().sleep((long) (400 + Math.random() * 220));
+                } catch (InterruptedException e) {
+                        e.printStackTrace();
+                }
+                
                 if(this.memberStatus.equals("NORMAL")) {
 
                         PointSaved pointSaved = new PointSaved();
