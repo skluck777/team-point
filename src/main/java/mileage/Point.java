@@ -23,7 +23,7 @@ public class Point {
         @PostPersist
         public void onPostPersist() {
                 System.out.println("\n$$$onPostPersist");
-<<<<<<< HEAD
+
                 if(this.memberStatus.equals("NORMAL")) {
 
                         PointSaved pointSaved = new PointSaved();

@@ -17,7 +17,7 @@ class Forfeiture {
     public void onPrePersist(){
         System.out.println("onPre Forfeiture");
         try {
-            Thread.currentThread().sleep((long) (400 + Math.random() * 230));
+            Thread.currentThread().sleep((long) (100 + Math.random() * 230));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -26,12 +26,14 @@ class Forfeiture {
     @PostPersist
     public void onPostPersist(){
         System.out.println("onPost Forfeiture");
+        System.out.println(memberId);
+        System.out.println(remainPoint);
 
         PointForfeited pointForfeited = new PointForfeited();
         pointForfeited.setMemberId(memberId);
 
         BeanUtils.copyProperties(this, pointForfeited);
-
+        pointForfeited.setMemberId(memberId);
 
         pointForfeited.setRemainPoint(1000L);
         pointForfeited.publishAfterCommit();
