@@ -14,41 +14,33 @@ import java.util.Optional;
 
 @Service
 public class PolicyHandler {
-        @Autowired
-        PointRepository pointRepository;
+    @Autowired
+    PointRepository pointRepository;
 
-        @StreamListener(KafkaProcessor.INPUT)
-        public void onStringEventListener(@Payload String eventString) {
+    @StreamListener(KafkaProcessor.INPUT)
+    public void onStringEventListener(@Payload String eventString) {
 
-        }
+    }
 
-        @StreamListener(KafkaProcessor.INPUT)
-        public void wheneverMemberStatusChanged_UpdateMemberStatus(@Payload MemberStatusChanged memberStatusChanged) {
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverMemberStatusChanged_UpdateMemberStatus(@Payload MemberStatusChanged memberStatusChanged) {
 
-                if (memberStatusChanged.isMe()) {
-                        System.out.println("##### memberStatusChanged : " + memberStatusChanged.toJson());
+        if (memberStatusChanged.isMe()) {
+            System.out.println("##### memberStatusChanged : " + memberStatusChanged.toJson());
 
-                        // Optional<Point> pointOptional = pointRepository.findByMemberId(memberStatusChanged.getMemberId());
-                        // Point point = pointOptional.get();
+            Point point = new Point();
+            point.setMemberId(memberStatusChanged.getMemberId());
+            point.setMemberStatus(memberStatusChanged.getMemberStatus());
+            if ("NORMAL".equals(memberStatusChanged.getMemberStatus())) {
+                point.setRemainPoint(point.getRemainPoint());
+            } else if ("WITHDRAWAL".equals(memberStatusChanged.getMemberStatus())) {
+                point.setRemainPoint(0L);
+            } else if ("ABNORMAL".equals(memberStatusChanged.getMemberStatus())) {
+                point.setRemainPoint(0L);
+            }
 
- /*
-                        Optional<Point> pointOptional = pointRepository.findByMemberId(memberStatusChanged.getMemberId());
-                        Point point = pointOptional.get();
-                        point.setMemberStatus(memberStatusChanged.getMemberStatus());
-                        pointRepository.save(point);
-*/
-
-                        Point point = new Point();
-                        point.setMemberId(memberStatusChanged.getMemberId());
-                        point.setMemberStatus(memberStatusChanged.getMemberStatus());
-                        if ("NORMAL".equals(memberStatusChanged.getMemberStatus())) {
-                                point.setRemainPoint(point.getRemainPoint());
-                        } else if ("WITHDRAWAL".equals(memberStatusChanged.getMemberStatus())) {
-                                point.setRemainPoint(0L);
-                        }
-                        pointRepository.save(point);
-
-                }
+            pointRepository.save(point);
 
         }
+    }
 }

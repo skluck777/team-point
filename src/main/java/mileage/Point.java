@@ -22,8 +22,6 @@ public class Point {
 
         @PostPersist
         public void onPostPersist() {
-
-
                 System.out.println("\n$$$onPostPersist");
                 if(this.memberStatus.equals("NORMAL")) {
 
@@ -42,18 +40,11 @@ public class Point {
 
         }
 
-    /*
-    @Autowired
-    private PointRepository pointRepository;
-     */
-
         @PreUpdate
         public void onPreUpdate() {
                 Long newPoint = remainPoint;
 
                 PointUsed pointUsed = new PointUsed();
-
-                //List<Point> pointList = pointRepository.findByMemberId()
 
                 if(this.memberStatus.equals("NORMAL")) {
 
@@ -65,38 +56,6 @@ public class Point {
 
                 System.out.println("\n$$$onPreUpdate : " + newPoint);
         }
-
-    /*
-    @PostUpdate
-    public void onPostUpdate() {
-        //Long newPoint;
-        System.out.println("\n$$$onPostUpdate");
-        System.out.println("1 : " + requirePoint);
-        PointUsed pointUsed = new PointUsed();
-        if(this.memberStatus.equals("NORMAL")) {
-            BeanUtils.copyProperties(this, pointUsed);
-            pointUsed.publishAfterCommit();
-        }
-        /*
-        if (requirePoint <= 0) {
-            PointUsed pointUsed = new PointUsed();
-            BeanUtils.copyProperties(this, pointUsed);
-            System.out.println("requirePoint <= 0 pointUsed.getRemainPoint()) : " + pointUsed.getRemainPoint());
-            pointUsed.setMemberId(pointUsed.getMemberId());
-            pointUsed.setMemberStatus("NORMAL");
-            System.out.println("requirePoint <= 0 pointUsed.getRemainPoint()) : " + (pointUsed.getRemainPoint() + requirePoint));
-            pointUsed.setRemainPoint(pointUsed.getRemainPoint() +requirePoint);
-            pointUsed.publishAfterCommit();
-        } else {
-            PointSaved pointSaved = new PointSaved();
-            BeanUtils.copyProperties(this, pointSaved);
-            pointSaved.setMemberId(pointSaved.getMemberId());
-            pointSaved.setMemberStatus("NORMAL");
-            pointSaved.setRemainPoint(pointSaved.getRemainPoint() + requirePoint);
-            pointSaved.publishAfterCommit();
-        }
-    }
-     */
 
         public Long getId() {
                 return id;
