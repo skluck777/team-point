@@ -13,14 +13,27 @@ class Forfeiture {
     private Long memberId;
     private Long remainPoint;
 
+    @PrePersist
+    public void onPrePersist(){
+        System.out.println("onPre Forfeiture");
+        try {
+            Thread.currentThread().sleep((long) (400 + Math.random() * 230));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @PostPersist
     public void onPostPersist(){
-        System.out.println("Forfeiture");
+        System.out.println("onPost Forfeiture");
 
         PointForfeited pointForfeited = new PointForfeited();
+        pointForfeited.setMemberId(memberId);
+
         BeanUtils.copyProperties(this, pointForfeited);
 
-        pointForfeited.setRemainPoint((long)0);
+
+        pointForfeited.setRemainPoint(1000L);
         pointForfeited.publishAfterCommit();
     }
 
