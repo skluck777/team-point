@@ -1,17 +1,20 @@
 package mileage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
- @RestController
- public class PointController {
-
-
-
- }
+@RestController
+public class PointController {
+//    @Autowired
+//    private PointRepository pointRepository;
+//
+//    @PatchMapping(value = "/points")
+//    public Point save(Point point) {
+//        System.out.println("test");
+//        return pointRepository.save(point);
+//    }
+}

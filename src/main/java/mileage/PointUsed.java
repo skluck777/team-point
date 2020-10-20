@@ -6,6 +6,7 @@ public class PointUsed extends AbstractEvent {
     private Long memberId;
     private Long remainPoint;
     private String memberStatus;
+    private Long requirePoint;
 
     public Long getId() {
         return id;
@@ -34,5 +35,13 @@ public class PointUsed extends AbstractEvent {
 
     public void setMemberStatus(String memberStatus) {
         this.memberStatus = memberStatus;
+    }
+
+    public Long getRequirePoint() {
+        return requirePoint;
+    }
+
+    public void setRequirePoint(Long usePoint) {
+        this.requirePoint = usePoint;
     }
 }
