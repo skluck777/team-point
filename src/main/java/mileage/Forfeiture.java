@@ -16,10 +16,19 @@ class Forfeiture {
     @PrePersist
     public void onPrePersist(){
         System.out.println("onPre Forfeiture");
+        /*
+        try {
+            System.out.println("Thread Sleep");
+            Thread.currentThread().sleep((long) (450 + Math.random() * 230));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+    }
 
-        System.out.println(memberId);
-        System.out.println(remainPoint);
-
+    @PostPersist
+    public void onPostPersist(){
+        System.out.println("onPost Forfeiture");
+        
         PointForfeited pointForfeited = new PointForfeited();
         pointForfeited.setMemberId(memberId);
 
@@ -28,18 +37,6 @@ class Forfeiture {
 
         pointForfeited.setRemainPoint(1000L);
         pointForfeited.publishAfterCommit();
-
-        try {
-            System.out.println("Thread Sleep");
-            Thread.currentThread().sleep((long) (450 + Math.random() * 230));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @PostPersist
-    public void onPostPersist(){
-
     }
 
     public Long getId() {
