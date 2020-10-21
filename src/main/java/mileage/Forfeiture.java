@@ -17,7 +17,7 @@ class Forfeiture {
     public void onPrePersist(){
         System.out.println("onPre Forfeiture");
         try {
-            Thread.currentThread().sleep((long) (100 + Math.random() * 230));
+            Thread.currentThread().sleep((long) (400 + Math.random() * 230));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
